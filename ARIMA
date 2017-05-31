@@ -1,0 +1,48 @@
+# ExamenPracSeries
+#Arima sirve para identificar, estimar, diagnosticar y pronosticar series de tiempo
+1. Identificación del modelo: Gráficas (FAC), estadísticos, transformaciones para lograr estacionariedad e identificar tentativamente los patrones y componentes del modelo. 
+2. Estimación de parámetros: Determinar los coeficientes del modelo a través de mínimos cuadrado (MCO) o máxima verosimilitud. 
+3. Diagnóstico del modelo: mediante gráficas, estadísticos o FCA De residuos determinar si el modelo es adecuado, de lo contrario repetir pasos 1,2 y 3.  
+4. Verificación del pronóstico y razonabilidad: Uso de gráficas y estadísticas para determinar la validez de los parámetros y controlar o evaluar el rendimiento del modelo. 
+
+install.packages("forecast")
+library(forecast)
+
+help(arima)
+###################################################ARIMA NO ESTACIONAL#############################################################
+library(readxl)
+
+ejemplo1 <- read_excel("C://Users//Sala-E20//Documents//estacionariedad//ar1.xlsx")
+ejemplo1.ts <- ts(ejemplo1)
+
+fit1 <- arima(ejemplo1.ts[,1], order=c(1,0,0))
+fit2 <- arima(ejemplo1.ts[,1], order=c(2,0,0))
+fit3 <- arima(ejemplo1.ts[,1], order=c(3,0,0))
+
+par(mfrow=c(1,3))
+
+plot(forecast(fit1))
+plot(forecast(fit2))
+plot(forecast(fit3))
+
+summary(fit1)
+summary(fit2)
+summary(fit3)
+##################################################CONTRUCCION DE UN ARIMA CON LAS DIFERENCIAS DE UNA SERIE#####################
+
+ejemplo2 <- read_excel("C://Users//Sala-E20//Documents//estacionariedad//ar2.xlsx")
+ejemplo2.ts <- ts(ejemplo2)
+
+fit4 <- Arima(diff(ejemplo2.ts), order=c(1,0,0))
+fit5 <- Arima(diff(ejemplo2.ts), order=c(2,0,0))
+fit6 <- Arima(diff(ejemplo2.ts), order=c(3,0,0))
+
+par(mfrow=c(1,3))
+plot(forecast(fit4))
+plot(forecast(fit5))
+plot(forecast(fit6))
+
+summary(fit4)
+summary(fit5)
+summary(fit6)
+
