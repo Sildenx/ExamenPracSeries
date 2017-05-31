@@ -1,0 +1,16 @@
+# ExamenPracSeries
+indicador <- read_excel("C://Users//Sala-E20//Documents//estacionariedad//indicador.xlsx")
+indicador.ts <- ts(indicador, start=c(1975,1), frequency=292)
+windows()
+plot(indicador.ts, col="red")
+
+#Q de Ljung-box. Diferenciación
+#La prueba Q de Ljung - box 
+#Una serie es estacionaria cuando es estabele a lo largo del tiempo, uando la media y varianza son constantes en el tiempo.
+# Esta prueba permite probar en forma conjunta de que todos los coeficientes de autocorrelación son simultáneamente iguales a cero, esto es que son independientes,
+#Ho: Las autocorrelaciones son independientes.
+# Ha: Las autocorrelaciones no son independientes.
+#si p value es menor a .05 se "acepta Ho". 
+Box.test(indicador.ts, lag=25, type="Ljung-Box")
+
+#lang se refiere hasta  que retraso se garantiza que los coeficientes son independientes 
