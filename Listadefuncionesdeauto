@@ -1,0 +1,4 @@
+# ExamenPracSeries
+acf(estacionaria.ts, lag.max = 25)
+
+list(acf(estacionaria.ts))
