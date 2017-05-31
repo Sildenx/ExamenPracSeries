@@ -1,0 +1,18 @@
+# ExamenPracSeries
+### ARMA(1,1)
+
+library(fpp)
+
+library(readxl)
+ventas <- read_excel("F://clases//time-series//topics//data//arma1.xlsx")
+ventas.ts <-ts(ventas)
+adf.test(ventas.ts)
+acf(ventas.ts)
+
+arma <- diff(ventas.ts)
+summary(armam1 <- arma(arma, order = c(1, 0)))
+summary(armam2 <- arma(arma, order = c(2, 0)))
+summary(armam3 <- arma(arma, order = c(0, 1)))
+summary(armam4 <- arma(arma, order = c(0, 2)))
+summary(armam5 <- arma(arma, order = c(1, 1)))
+plot(armam)
