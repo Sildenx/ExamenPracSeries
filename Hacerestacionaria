@@ -1,0 +1,11 @@
+# ExamenPracSeries
+ns <- nsdiffs(medica.ts)
+if(ns > 0) {
+  xstar <- diff(medica.ts,lag=frequency(medica.ts),differences=ns)
+} else {
+  xstar <- medica.ts
+}
+nd <- ndiffs(xstar)
+if(nd > 0) {
+  xstar <- diff(xstar,differences=nd)
+}
