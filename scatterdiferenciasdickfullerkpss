@@ -1,0 +1,43 @@
+# ExamenPracSeries
+#..............................Scatter............................................................................................
+indfirst <- diff((indicador.ts))
+plot(indicador.ts, indfirst, pch="circle", lty="dotted")
+
+#........................................Diferencias..............................................................................
+#acf La función acfcomputa (y por parcelas por defecto) las estimaciones de 
+#la función de autocorrelación o autocovariancia. 
+indicaacf <- acf(indicador.ts)
+indicadiff <- acf(diff(indicador.ts))
+indicadiff2 <- acf(diff(indicador.ts, lag=2))
+
+plot()
+par(mfrow= c(1,3))
+plot(indicaacf, main="FAC yt")
+plot(indicadiff, main="FAC Primeras diferencias", col="red")
+plot(indicadiff2, main= "FAC Segundas diferencias", col="green")
+
+#............................................Prueba de raiz unitaria  Dickey Fuller ....................................................
+#Pruba  para saber si hay estacionariedad 
+#Prueba estacionariedad: Dickey-Fuller
+#Ho: es estacionaria 
+adf.test(indicador.ts, alternative = "stationary")
+#si p < .05 se acepta la hipotesis nula 
+
+#....................................................kpss..............................................................................
+kpss.test(indicador.ts)
+# Es utilizada cuando existe la posibilidad de una  raiz unitaria , en caso de ser asi, se realiza el kpss
+#Hipotesis nula: un observable series de tiempo es estacionaria alrededor de una tendencia determinista
+
+medica <- read_excel("F://clases//time-series//clases//data//medica.xlsx")
+
+medica.ts <- ts(medica, start=c(1975,1), frequency=292)
+
+par(mfrow=c(2,2))
+plot(medica.ts)
+plot(log(medica.ts))
+plot(diff(log(medica.ts)))
+plot(diff(diff(medica.ts)))
+adf.test(medica.ts, alternative = "stationary")
+kpss.test(medica.ts)
+
+
